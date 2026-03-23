@@ -10,7 +10,7 @@ pipeline {
 
         stage('Run Script') {
             steps {
-                sh 'python3 backend/pipe1.py input/data.csv output/results.csv'
+                sh 'python3 pipe1.py input/data.csv output/results.csv'
             }
         }
 
