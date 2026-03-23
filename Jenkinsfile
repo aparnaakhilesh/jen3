@@ -10,13 +10,13 @@ pipeline {
 
         stage('Run Script') {
             steps {
-                sh './venv/bin/python backend/pipe1.py input/data.csv output/results.csv'
+                sh 'python3 backend/pipe1.py input/data.csv output/results.csv'
             }
         }
 
         stage('Test') {
             steps {
-                sh './venv/bin/python -m unittest discover backend/tests || echo "No tests found"'
+                sh 'python3 -m unittest discover backend/tests || echo "No tests found"'
             }
         }
 
@@ -36,5 +36,4 @@ pipeline {
         }
     }
 }
-
 
