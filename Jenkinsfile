@@ -4,36 +4,37 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+                // Pull code from your repository branch
                 git branch: 'pipline', url: 'https://github.com/aparnaakhilesh/jen3.git'
             }
         }
 
-        stage('Run Script') {
+        stage('Setup Python') {
             steps {
-                sh 'python3 pipe1.py input/data.csv output/results.csv'
+                sh 'python3 --version'
+            }
+        }
+
+        stage('Run') {
+            steps {
+                sh 'python3 pipe1.py'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'python3 -m unittest discover backend/tests || echo "No tests found"'
-            }
-        }
-
-        stage('Archive Results') {
-            steps {
-                archiveArtifacts artifacts: 'output/*.csv', fingerprint: true
+                // If you add pytest-based tests later
+                sh 'pytest || echo "No tests found"'
             }
         }
     }
 
     post {
         success {
-            echo 'Pipeline executed successfully!'
+            echo 'Python  pipeline executed successfully!'
         }
         failure {
             echo 'Pipeline failed. Please check logs.'
         }
     }
 }
-
